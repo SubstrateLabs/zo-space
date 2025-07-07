@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX, useEffect, useState } from "react";
+import { type JSX, useEffect, useState } from "react";
 
 import { useTheme } from "next-themes";
 
