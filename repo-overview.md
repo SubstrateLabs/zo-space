@@ -1,7 +1,7 @@
 
 # Zo Space – Full-Stack Starter
 
-This repository is a **monorepo** that marries a modern **React (Vite)** front-end with a lightweight **FastAPI** back-end.  It is intentionally minimal today, but is designed to grow with your needs — add pages, API routes, background jobs, whatever your project demands.  Use this document as your go-to reference for the project structure, conventions, and common tasks.
+This repository is a **monorepo** that marries a modern **React (Vite)** front-end with a lightweight **FastAPI** back-end.  It is intentionally minimal today, but is designed to grow with your needs—add pages, API routes, background jobs, whatever your project demands.  Use this document as your go-to reference for the project structure, conventions, and common tasks.
 
 ---
 
