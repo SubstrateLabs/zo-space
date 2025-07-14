@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const IndexPage = () => {
   return (
@@ -9,6 +11,9 @@ const IndexPage = () => {
       <p className="text-md text-muted-foreground mb-8">
         this space built and managed by zo.computer
       </p>
+      <Button asChild>
+        <Link to="/bio">GOTO BIO</Link>
+      </Button>
     </div>
   );
 };
