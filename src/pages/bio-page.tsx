@@ -1,10 +1,23 @@
 import * as React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Mail, MapPin, Calendar, Github, Linkedin, Twitter } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Calendar,
+  Github,
+  Linkedin,
+  Twitter,
+} from "lucide-react";
 
 const BioPage = () => {
   return (
@@ -16,7 +29,9 @@ const BioPage = () => {
             <AvatarFallback className="text-2xl">BZ</AvatarFallback>
           </Avatar>
           <h1 className="text-4xl font-bold mb-2">Benjamin Zo</h1>
-          <p className="text-xl text-muted-foreground mb-4">Full Stack Developer & Designer</p>
+          <p className="text-xl text-muted-foreground mb-4">
+            Full Stack Developer & Designer
+          </p>
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <MapPin className="w-4 h-4" />
@@ -38,24 +53,31 @@ const BioPage = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm leading-relaxed">
-                I'm a passionate full-stack developer with over 5 years of experience building 
-                modern web applications. I love creating intuitive user experiences and robust 
-                backend systems that scale. When I'm not coding, you'll find me exploring new 
-                technologies, contributing to open source projects, or enjoying the great outdoors.
+                I'm a passionate full-stack developer with over 5 years of
+                experience building modern web applications. I love creating
+                intuitive user experiences and robust backend systems that
+                scale. When I'm not coding, you'll find me exploring new
+                technologies, contributing to open source projects, or enjoying
+                the great outdoors.
               </p>
               <p className="text-sm leading-relaxed">
-                My journey in tech started with a fascination for how things work under the hood. 
-                Today, I specialize in React, TypeScript, Node.js, and Python, always staying 
-                current with the latest industry trends and best practices.
+                My journey in tech started with a fascination for how things
+                work under the hood. Today, I specialize in React, TypeScript,
+                Node.js, and Python, always staying current with the latest
+                industry trends and best practices.
               </p>
               <Separator />
               <div>
                 <h3 className="font-semibold mb-2">What I Do</h3>
                 <ul className="text-sm space-y-1 text-muted-foreground">
-                  <li>• Build scalable web applications from concept to deployment</li>
+                  <li>
+                    • Build scalable web applications from concept to deployment
+                  </li>
                   <li>• Design and implement RESTful APIs and microservices</li>
                   <li>• Create responsive, accessible user interfaces</li>
-                  <li>• Mentor junior developers and lead technical discussions</li>
+                  <li>
+                    • Mentor junior developers and lead technical discussions
+                  </li>
                   <li>• Optimize performance and user experience</li>
                 </ul>
               </div>
@@ -108,26 +130,54 @@ const BioPage = () => {
                 <CardTitle>Get In Touch</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button variant="outline" className="w-full justify-start" asChild>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  asChild
+                >
                   <a href="mailto:benjamin@zo.space">
                     <Mail className="w-4 h-4 mr-2" />
                     benjamin@zo.space
                   </a>
                 </Button>
-                <Button variant="outline" className="w-full justify-start" asChild>
-                  <a href="https://github.com/benjaminzo" target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  asChild
+                >
+                  <a
+                    href="https://github.com/benjaminzo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Github className="w-4 h-4 mr-2" />
                     GitHub
                   </a>
                 </Button>
-                <Button variant="outline" className="w-full justify-start" asChild>
-                  <a href="https://linkedin.com/in/benjaminzo" target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  asChild
+                >
+                  <a
+                    href="https://linkedin.com/in/benjaminzo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Linkedin className="w-4 h-4 mr-2" />
                     LinkedIn
                   </a>
                 </Button>
-                <Button variant="outline" className="w-full justify-start" asChild>
-                  <a href="https://twitter.com/benjaminzo" target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  asChild
+                >
+                  <a
+                    href="https://twitter.com/benjaminzo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Twitter className="w-4 h-4 mr-2" />
                     Twitter
                   </a>
@@ -153,8 +203,9 @@ const BioPage = () => {
                 <Badge variant="outline">2021 - Present</Badge>
               </div>
               <p className="text-sm text-muted-foreground">
-                Lead development of customer-facing applications serving 100k+ users. 
-                Architected microservices infrastructure and mentored a team of 5 developers.
+                Lead development of customer-facing applications serving 100k+
+                users. Architected microservices infrastructure and mentored a
+                team of 5 developers.
               </p>
             </div>
             <Separator />
@@ -167,7 +218,7 @@ const BioPage = () => {
                 <Badge variant="outline">2019 - 2021</Badge>
               </div>
               <p className="text-sm text-muted-foreground">
-                Built responsive web applications using React and TypeScript. 
+                Built responsive web applications using React and TypeScript.
                 Collaborated with designers to implement pixel-perfect UIs.
               </p>
             </div>
@@ -176,13 +227,16 @@ const BioPage = () => {
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-semibold">Junior Developer</h3>
-                  <p className="text-sm text-muted-foreground">WebSolutions LLC</p>
+                  <p className="text-sm text-muted-foreground">
+                    WebSolutions LLC
+                  </p>
                 </div>
                 <Badge variant="outline">2018 - 2019</Badge>
               </div>
               <p className="text-sm text-muted-foreground">
-                Developed and maintained client websites using modern web technologies. 
-                Gained experience in full-stack development and agile methodologies.
+                Developed and maintained client websites using modern web
+                technologies. Gained experience in full-stack development and
+                agile methodologies.
               </p>
             </div>
           </CardContent>
@@ -192,4 +246,4 @@ const BioPage = () => {
   );
 };
 
-export default BioPage; 
+export default BioPage;
