@@ -5,7 +5,7 @@ const API_BASE_URL = `https://${import.meta.env.VITE_ZO_USER}.api.zo.space`;
 async function apiFetch(endpoint: string, options: RequestInit = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
   const defaultHeaders = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     ...options.headers,
   };
 
@@ -29,4 +29,4 @@ async function apiFetch(endpoint: string, options: RequestInit = {}) {
 //   return apiFetch('/users');
 // }
 
-export { API_BASE_URL, apiFetch }; 
+export { API_BASE_URL, apiFetch };
