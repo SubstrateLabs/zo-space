@@ -24,7 +24,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <Toaster />
     <BrowserRouter>
-      <RouteChangeNotifier />
+      <RouteChangeNotifier routes={ROUTES.map((route) => route.path)} />
       <Routes>
         {/* ALL CUSTOM ROUTES */}
         {ROUTES.map(({ path, Component }) => (
