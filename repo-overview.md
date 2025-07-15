@@ -1,18 +1,17 @@
-
 # Zo Space – Full-Stack Starter
 
-This repository is a **monorepo** that marries a modern **React (Vite)** front-end with a lightweight **FastAPI** back-end.  It is intentionally minimal today, but is designed to grow with your needs—add pages, API routes, background jobs, whatever your project demands.  Use this document as your go-to reference for the project structure, conventions, and common tasks.
+This repository is a **monorepo** that marries a modern **React (Vite)** front-end with a lightweight **FastAPI** back-end. It is intentionally minimal today, but is designed to grow with your needs—add pages, API routes, background jobs, whatever your project demands. Use this document as your go-to reference for the project structure, conventions, and common tasks.
 
 ---
 
 ## 1. Stack at a Glance
 
-| Layer      | Technology                                          | Purpose                                                                  |
-|------------|-----------------------------------------------------|--------------------------------------------------------------------------|
-| Front-end  | Vite 7 · React 19 · TypeScript                      | Fast dev server, modern React, type safety                               |
-| UI         | Tailwind 4 · Radix UI primitives · shadcn/ui        | Rapidly build accessible, theme-able interfaces                          |
-| Back-end   | FastAPI 0.116 · Python 3.12                         | For when we need to back the web page with a running service or database |
-| Tooling    | ESLint · TypeScript strict mode · uv (Astral) · npm | Code quality, dependency management                                      |
+| Layer     | Technology                                          | Purpose                                                                  |
+| --------- | --------------------------------------------------- | ------------------------------------------------------------------------ |
+| Front-end | Vite 7 · React 19 · TypeScript                      | Fast dev server, modern React, type safety                               |
+| UI        | Tailwind 4 · Radix UI primitives · shadcn/ui        | Rapidly build accessible, theme-able interfaces                          |
+| Back-end  | FastAPI 0.116 · Python 3.12                         | For when we need to back the web page with a running service or database |
+| Tooling   | ESLint · TypeScript strict mode · uv (Astral) · npm | Code quality, dependency management                                      |
 
 ---
 
@@ -47,7 +46,7 @@ This repository is a **monorepo** that marries a modern **React (Vite)** front-e
 
 • **Node.js >= 18** (dependencies managed through plain npm).
 
-• **Python >= 3.12**  plus the [uv](https://github.com/astral-sh/uv) package manager *(10× faster than pip)*.  Install once:
+• **Python >= 3.12** plus the [uv](https://github.com/astral-sh/uv) package manager _(10× faster than pip)_. Install once:
 
 ---
 
@@ -59,13 +58,14 @@ Create a `.env` file at the repo root (automatically picked up by Vite):
 VITE_ZO_USER=alice # global ZO user name, provided by the system
 ```
 
-Additional variables you add that start with `VITE_` are automatically inlined into the front-end at build time.  For server-side secrets use `api/.env` (loaded with `python-dotenv`).
+Additional variables you add that start with `VITE_` are automatically inlined into the front-end at build time. For server-side secrets use `api/.env` (loaded with `python-dotenv`).
 
 ---
 
 ## 5. Common Tasks
 
 ### 5.1 Add a New Page
+
 1. Create `src/pages/<name>-page.tsx`.
 2. Import and wire the route in `src/App.tsx`:
 
@@ -77,6 +77,7 @@ Additional variables you add that start with `VITE_` are automatically inlined i
 ```
 
 ### 5.2 Add an API Endpoint
+
 1. Create `api/routers/<module>.py` with a FastAPI `APIRouter` if it is a new domain, otherwise reuse an existing router
 2. Routers are hooked up in `api/main.py`:
 
@@ -86,15 +87,16 @@ app.include_router(users.router, prefix="/users", tags=["users"])
 ```
 
 ### 5.3 Consume the API from React
-Use the lightweight wrapper in `src/api/client.ts` (built atop the native Fetch API).  You can use React Query for caching & revalidation:
+
+Use the lightweight wrapper in `src/api/client.ts` (built atop the native Fetch API). You can use React Query for caching & revalidation:
 
 ```tsx
-import { useQuery } from '@tanstack/react-query';
-import { apiFetch } from '@/api/client';
+import { useQuery } from "@tanstack/react-query";
+import { apiFetch } from "@/api/client";
 
 const { data, isLoading } = useQuery({
-  queryKey: ['users'],
-  queryFn: () => apiFetch('/users'),
+  queryKey: ["users"],
+  queryFn: () => apiFetch("/users"),
 });
 ```
 
@@ -103,7 +105,7 @@ const { data, isLoading } = useQuery({
 ## 7. Tooling Cheatsheet
 
 | Command             | What it does                                              |
-|---------------------|-----------------------------------------------------------|
+| ------------------- | --------------------------------------------------------- |
 | `npm run typecheck` | TypeScript project-wide type checking                     |
 | `npm run lint`      | Run ESLint over `src/`                                    |
 | `uv add <pkg>`      | Add a backend dependency and lock it. (run from api/ dir) |
@@ -113,9 +115,9 @@ const { data, isLoading } = useQuery({
 
 ## 8. Conventions & Tips
 
-• **Component Library** The `src/components/ui/` folder contains autogenerated shadcn wrappers around Radix primitives.  Generate more with `npx shadcn-ui@latest add <component>`. The complete registry can be looked up online.
+• **Component Library** The `src/components/ui/` folder contains autogenerated shadcn wrappers around Radix primitives. Generate more with `npx shadcn-ui@latest add <component>`. The complete registry can be looked up online.
 
-• **Theming** Global CSS variables live in `src/index.css`. User specified themes live in `src/user-theme.css`. These user-themes are not to be modified directly and are autogenerated from their preferences. 
+• **Theming** Global CSS variables live in `src/index.css`. User specified themes live in `src/user-theme.css`. These user-themes are not to be modified directly and are autogenerated from their preferences.
 
 • **Absolute Imports** Use `@/` instead of relative `../../` paths.
 

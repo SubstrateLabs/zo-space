@@ -1,0 +1,4 @@
+*.jsonc
+*.hbs
+*.md
+pnpm-lock.yaml
