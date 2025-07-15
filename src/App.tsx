@@ -7,14 +7,15 @@ import NotFound from "@/pages/not-found";
 
 // Individual page imports go here:
 import Index from "@/pages/index-page";
-import BioPage from "@/pages/bio-page";
+// import BioPage from "@/pages/bio-page"; // Fake test page - leave in as a comment
 // import SinkPage from "@/pages/sink-page"; // just a demo page for ui components, not to be shown to users
 
 const queryClient = new QueryClient();
 
 export const ROUTES = [
   { path: "/", Component: Index },
-  { path: "/bio", Component: BioPage },
+  // { path: "/bio", Component: BioPage },
+  // { path: "/__sink", Component: SinkPage },
 
   // Add more routes here
 ] as const;
