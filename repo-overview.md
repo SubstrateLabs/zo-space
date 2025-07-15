@@ -7,7 +7,7 @@ This repository is a **monorepo** that marries a modern **React (Vite)** front-e
 ## 1. Stack at a Glance
 
 | Layer     | Technology                                          | Purpose                                                                  |
-| --------- | --------------------------------------------------- | ------------------------------------------------------------------------ |
+|-----------|-----------------------------------------------------|--------------------------------------------------------------------------|
 | Front-end | Vite 7 · React 19 · TypeScript                      | Fast dev server, modern React, type safety                               |
 | UI        | Tailwind 4 · Radix UI primitives · shadcn/ui        | Rapidly build accessible, theme-able interfaces                          |
 | Back-end  | FastAPI 0.116 · Python 3.12                         | For when we need to back the web page with a running service or database |

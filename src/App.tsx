@@ -1,48 +1,23 @@
 import "./App.css";
 import { Toaster } from "@/components/ui/sonner";
+import RouteChangeNotifier from "@/components/route-change-notifier";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-import { useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NotFound from "@/pages/not-found";
+
+// Individual page imports go here:
 import Index from "@/pages/index-page";
 import BioPage from "@/pages/bio-page";
-// import SinkPage from "@/pages/sink-page";
-import NotFound from "@/pages/not-found";
+// import SinkPage from "@/pages/sink-page"; // just a demo page for ui components, not to be shown to users
 
 const queryClient = new QueryClient();
 
-const RouteChangeNotifier = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+export const ROUTES = [
+  { path: "/", Component: Index },
+  { path: "/bio", Component: BioPage },
 
-  useEffect(() => {
-    window.parent.postMessage(
-      { href: location.pathname + location.search + location.hash },
-      "*",
-    );
-  }, [location]);
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (event.data?.navigate) {
-        navigate(event.data.navigate);
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, [navigate]);
-
-  return null;
-};
+  // Add more routes here
+] as const;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -50,10 +25,10 @@ const App = () => (
     <BrowserRouter>
       <RouteChangeNotifier />
       <Routes>
-        {/* CUSTOM ROUTES GO HERE */}
-        <Route path="/" element={<Index />} />
-        <Route path="/bio" element={<BioPage />} />
-        {/*<Route path="/__sink" element={<SinkPage />} />*/}
+        {/* ALL CUSTOM ROUTES */}
+        {ROUTES.map(({ path, Component }) => (
+          <Route key={path} path={path} element={<Component />} />
+        ))}
 
         {/* CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

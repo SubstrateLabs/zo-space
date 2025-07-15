@@ -1,0 +1,27 @@
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const RouteChangeNotifier = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    window.parent.postMessage(
+      { href: location.pathname + location.search + location.hash },
+      "*",
+    );
+  }, [location]);
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.navigate) {
+        navigate(event.data.navigate);
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [navigate]);
+  return null;
+};
+
+export default RouteChangeNotifier;
