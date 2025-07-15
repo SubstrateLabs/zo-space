@@ -1,7 +1,13 @@
 import "./App.css";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { useEffect } from "react";
 import Index from "@/pages/index-page";
 import BioPage from "@/pages/bio-page";
@@ -12,6 +18,7 @@ const queryClient = new QueryClient();
 
 const RouteChangeNotifier = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.parent.postMessage(
@@ -19,6 +26,20 @@ const RouteChangeNotifier = () => {
       "*",
     );
   }, [location]);
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.navigate) {
+        navigate(event.data.navigate);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [navigate]);
 
   return null;
 };
