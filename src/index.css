@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400&display=swap');
 @import "tailwindcss";
+@import "./fonts.css";
 @import "./user-theme.css";
 @import "tw-animate-css";
 
