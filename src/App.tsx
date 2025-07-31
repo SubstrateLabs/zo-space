@@ -8,7 +8,9 @@ import { getRoutesFromGlobImports } from "@/lib/pages";
 
 const queryClient = new QueryClient();
 
-const pageModules = import.meta.glob("./pages/**/*.tsx", { eager: true }) as Record<
+const pageModules = import.meta.glob("./pages/**/*.tsx", {
+  eager: true,
+}) as Record<
   string,
   {
     default: React.ComponentType;
@@ -18,8 +20,8 @@ const pageModules = import.meta.glob("./pages/**/*.tsx", { eager: true }) as Rec
 
 const allRoutes = getRoutesFromGlobImports(pageModules);
 
-export const PUBLIC_ROUTES = allRoutes.filter((route) => !route.isPrivate);
-export const PRIVATE_ROUTES = allRoutes.filter((route) => route.isPrivate);
+const PUBLIC_ROUTES = allRoutes.filter((route) => !route.isPrivate);
+const PRIVATE_ROUTES = allRoutes.filter((route) => route.isPrivate);
 
 const showPrivate = process.env.NODE_ENV === "development";
 
@@ -27,7 +29,10 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <Toaster />
     <BrowserRouter>
-      <RouteChangeNotifier routes={PUBLIC_ROUTES.map((route) => route.path)} />
+      <RouteChangeNotifier routes={allRoutes.map((route) => ({ 
+        path: route.path, 
+        isPrivate: route.isPrivate 
+      }))} />
       <Routes>
         {/* PRIVATE ROUTES */}
         {showPrivate

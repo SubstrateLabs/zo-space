@@ -1,8 +1,13 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+interface Route {
+  path: string;
+  isPrivate?: boolean;
+}
+
 interface RouteChangeNotifierProps {
-  routes?: string[];
+  routes?: Route[];
 }
 
 const RouteChangeNotifier = ({ routes = [] }: RouteChangeNotifierProps) => {
