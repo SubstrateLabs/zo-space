@@ -16,7 +16,10 @@ This is a full-stack monorepo combining React frontend with FastAPI backend:
 
 ### Frontend (React + Vite)
 - **Entry point**: `src/main.tsx` renders `App.tsx`
-- **Routing**: Uses React Router with routes defined in `src/App.tsx` in the `ROUTES` array
+- **Routing**: Convention-based routing with automatic discovery via `import.meta.glob()`
+  - Files in `src/pages/` are automatically mapped to routes
+  - `pages/foo/bar.tsx` → route `/foo/bar`
+  - Pages can export `isPrivate = true` for dev-only routes
 - **UI Components**: shadcn/ui components in `src/components/ui/` built on Radix primitives
 - **Styling**: Tailwind CSS 4 with CSS variables for theming
 - **State Management**: React Query for server state, React hooks for local state
@@ -32,16 +35,20 @@ This is a full-stack monorepo combining React frontend with FastAPI backend:
 
 1. **Path Aliases**: Use `@/` for absolute imports (maps to `src/`)
 2. **Component Structure**: 
-   - Pages in `src/pages/` named as `*-page.tsx`
+   - Pages in `src/pages/` (any `.tsx` file is auto-routed)
    - Reusable components in `src/components/`
    - UI primitives in `src/components/ui/`
-3. **Routing**: Add new routes to `ROUTES` array in `src/App.tsx`
+3. **Routing**: Automatic - just create files in `src/pages/`:
+   - `src/pages/index.tsx` → `/`
+   - `src/pages/about.tsx` → `/about`
+   - `src/pages/blog/post.tsx` → `/blog/post`
+   - Export `isPrivate = true` for dev-only routes
 4. **API Integration**: Use `apiFetch` from `src/api/client.ts` with React Query
 5. **Theming**: Global CSS variables in `src/index.css`, user themes in `src/user-theme.css`
 
 ## Development Workflow
 
-1. **Adding Pages**: Create in `src/pages/` and register in `src/App.tsx` ROUTES array
+1. **Adding Pages**: Create in `src/pages/` - routes are automatically discovered
 2. **Adding API Routes**: Create router in `api/routers/` and register in `api/main.py`
 3. **Adding Components**: Use shadcn/ui generator: `npx shadcn-ui@latest add <component>`
 4. **Environment Variables**: 

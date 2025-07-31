@@ -24,8 +24,8 @@ This repository is a **monorepo** that marries a modern **React (Vite)** front-e
 │   │   └── ui/        # shadcn-generated primitive wrappers
 │   ├── hooks/         # Custom React hooks
 │   ├── lib/           # Client-side utilities (API client etc.)
-│   ├── pages/         # Route components – mapped in `App.tsx`. each new path page should have its own page component here
-│   ├── App.tsx        # React root - ADD new path routes here via react-router
+│   ├── pages/         # Route components – automatically discovered via convention
+│   ├── App.tsx        # React root - uses import.meta.glob() for auto-routing
 │   └── main.tsx       # Entry for Vite
 ├── public/            # Static assets copied verbatim to dist/
 ├── index.html         # HTML template consumed by Vite
@@ -66,15 +66,19 @@ Additional variables you add that start with `VITE_` are automatically inlined i
 
 ### 5.1 Add a New Page
 
-1. Create `src/pages/<name>-page.tsx`.
-2. Import and wire the route in `src/App.tsx`:
+1. Create `src/pages/<name>.tsx` (convention: `pages/foo/bar.tsx` → route `/foo/bar`).
+2. Export your component as the default:
 
 ```tsx
-<Routes>
-  {/* other routes */}
-  <Route path="/about" element={<AboutPage />} />
-</Routes>
+export default function MyPage() {
+  return <div>Hello World</div>;
+}
+
+// Optional: mark as private (only visible in dev mode)
+export const isPrivate = true;
 ```
+
+Routes are automatically discovered - no need to update App.tsx!
 
 ### 5.2 Add an API Endpoint
 
