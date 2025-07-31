@@ -1,6 +1,12 @@
-# Zo Space – Full-Stack Starter
+# Zo Space – Repo Overview
 
-This repository is a **monorepo** that marries a modern **React (Vite)** front-end with a lightweight **FastAPI** back-end. It is intentionally minimal today, but is designed to grow with your needs—add pages, API routes, background jobs, whatever your project demands. Use this document as your go-to reference for the project structure, conventions, and common tasks.
+Zo Spaces are web applications that users build for themselves with the help of AI. Zo Spaces can become anything that the user needs, including interactive webpages or complete CRUD driven applets or virtually anything else. All Zo Spaces are intended to run locally on a single machine, and the web app will be accessible publicly through a URL.
+
+A Zo Space derives from this base repo that includes many starter pieces.
+
+This repository is a **monorepo** that combines a modern **React (Vite)** front-end with a lightweight **FastAPI** back-end. It is intentionally minimal to start, but is designed to grow with a user's needs—add pages, API routes, background jobs, whatever a user demands of their Zo Space.  
+
+Use this document as a reference for the project structure, conventions, and common tasks.
 
 ---
 
