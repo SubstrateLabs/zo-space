@@ -3,8 +3,6 @@ export interface PageInfo {
   routePath: string;
 }
 
-export const PAGES_GLOB = "./pages/**/*.tsx";
-
 export function deriveRouteFromPath(filePath: string): string {
   return (
     filePath.replace("./pages", "").replace(".tsx", "").replace("/index", "") ||

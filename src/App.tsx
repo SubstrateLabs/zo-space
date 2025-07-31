@@ -4,11 +4,11 @@ import RouteChangeNotifier from "@/components/route-change-notifier";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "@/pages/not-found";
-import { getRoutesFromGlobImports, PAGES_GLOB } from "@/lib/pages";
+import { getRoutesFromGlobImports } from "@/lib/pages";
 
 const queryClient = new QueryClient();
 
-const pageModules = import.meta.glob(PAGES_GLOB, { eager: true }) as Record<
+const pageModules = import.meta.glob("./pages/**/*.tsx", { eager: true }) as Record<
   string,
   {
     default: React.ComponentType;
