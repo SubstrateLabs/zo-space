@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "@/pages/not-found";
 import { getRoutesFromGlobImports } from "@/lib/pages";
+import { ThemeProvider } from "@/components/theme-provider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,29 +27,33 @@ const PRIVATE_ROUTES = allRoutes.filter((route) => route.isPrivate);
 const showPrivate = process.env.NODE_ENV === "development";
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <Toaster />
-    <BrowserRouter>
-      <RouteChangeNotifier routes={allRoutes.map((route) => ({ 
-        path: route.path, 
-        isPrivate: route.isPrivate 
-      }))} />
-      <Routes>
-        {/* PRIVATE ROUTES */}
-        {showPrivate
-          ? PRIVATE_ROUTES.map(({ path, Component }) => (
-              <Route key={path} path={path} element={<Component />} />
-            ))
-          : null}
-        {/* PUBLIC ROUTES */}
-        {PUBLIC_ROUTES.map(({ path, Component }) => (
-          <Route key={path} path={path} element={<Component />} />
-        ))}
-        {/* CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </QueryClientProvider>
+  <ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <Toaster />
+      <BrowserRouter>
+        <RouteChangeNotifier
+          routes={allRoutes.map((route) => ({
+            path: route.path,
+            isPrivate: route.isPrivate,
+          }))}
+        />
+        <Routes>
+          {/* PRIVATE ROUTES */}
+          {showPrivate
+            ? PRIVATE_ROUTES.map(({ path, Component }) => (
+                <Route key={path} path={path} element={<Component />} />
+              ))
+            : null}
+          {/* PUBLIC ROUTES */}
+          {PUBLIC_ROUTES.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
+          {/* CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;
