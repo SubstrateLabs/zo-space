@@ -32,7 +32,7 @@ export function getRoutesFromGlobImports(
         return false;
       }
 
-      if (path.includes("--zo-examples")) {
+      if (path.includes("--zo-examples") && !import.meta.env.VITE_ZO_INCLUDE_DEV_ROUTES) {
         return false;
       }
 
