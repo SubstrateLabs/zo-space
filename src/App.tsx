@@ -4,38 +4,56 @@ import RouteChangeNotifier from "@/components/route-change-notifier";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "@/pages/not-found";
-
-// Individual page imports go here:
-import Index from "@/pages/index-page";
-// import BioPage from "@/pages/bio-page"; // Fake test page - leave in as a comment
-// import SinkPage from "@/pages/sink-page"; // just a demo page for ui components, not to be shown to users
+import { getRoutesFromGlobImports } from "@/lib/pages";
+import { ThemeProvider } from "@/components/theme-provider.tsx";
 
 const queryClient = new QueryClient();
 
-export const ROUTES = [
-  { path: "/", Component: Index },
-  // { path: "/bio", Component: BioPage },
-  // { path: "/__sink", Component: SinkPage },
+const pageModules = import.meta.glob("./pages/**/*.tsx", {
+  eager: true,
+}) as Record<
+  string,
+  {
+    default: React.ComponentType;
+    isPrivate?: boolean;
+  }
+>;
 
-  // Add more routes here
-] as const;
+const allRoutes = getRoutesFromGlobImports(pageModules);
+
+const PUBLIC_ROUTES = allRoutes.filter((route) => !route.isPrivate);
+const PRIVATE_ROUTES = allRoutes.filter((route) => route.isPrivate);
+
+const showPrivate = process.env.NODE_ENV === "development";
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <Toaster />
-    <BrowserRouter>
-      <RouteChangeNotifier routes={ROUTES.map((route) => route.path)} />
-      <Routes>
-        {/* ALL CUSTOM ROUTES */}
-        {ROUTES.map(({ path, Component }) => (
-          <Route key={path} path={path} element={<Component />} />
-        ))}
-
-        {/* CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </QueryClientProvider>
+  <ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <Toaster />
+      <BrowserRouter>
+        <RouteChangeNotifier
+          routes={allRoutes.map((route) => ({
+            path: route.path,
+            isPrivate: route.isPrivate,
+          }))}
+        />
+        <Routes>
+          {/* PRIVATE ROUTES */}
+          {showPrivate
+            ? PRIVATE_ROUTES.map(({ path, Component }) => (
+                <Route key={path} path={path} element={<Component />} />
+              ))
+            : null}
+          {/* PUBLIC ROUTES */}
+          {PUBLIC_ROUTES.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
+          {/* CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;

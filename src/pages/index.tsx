@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 
-const IndexPage = () => {
+const Index = () => {
   const user = import.meta.env.VITE_ZO_USER;
 
   return (
@@ -44,4 +44,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default Index;

@@ -7,7 +7,10 @@ import react from "@vitejs/plugin-react";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(), 
+    tailwindcss(), 
+  ],
   server: {
     allowedHosts: true,
   },
@@ -15,6 +18,17 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
+    },
+  },
+  esbuild: {
+    loader: 'tsx',
+    include: /\.(tsx?|jsx?|zopage)$/,
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        '.zopage': 'tsx',
+      },
     },
   },
 });
