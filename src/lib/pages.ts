@@ -4,7 +4,7 @@ export interface PageInfo {
 }
 
 // System pages that should not be included in the route list
-const SYSTEM_PAGES = ['not-found.tsx'];
+const SYSTEM_PAGES = ["not-found.tsx"];
 
 export function deriveRouteFromPath(filePath: string): string {
   return (
@@ -28,16 +28,14 @@ export function getRoutesFromGlobImports(
   return Object.entries(globModules)
     .filter(([path]) => {
       // Check if this is a system page
-      if (SYSTEM_PAGES.some(systemPage => path.includes(systemPage))) {
+      if (SYSTEM_PAGES.some((systemPage) => path.includes(systemPage))) {
         return false;
       }
-      
-      // Check if the filename starts with --zo-examples-
-      const filename = path.split('/').pop() || '';
-      if (filename.startsWith('--zo-examples-')) {
+
+      if (path.includes("--zo-examples")) {
         return false;
       }
-      
+
       return true;
     })
     .map(([path, module]) => {
